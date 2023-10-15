@@ -1,3 +1,24 @@
+from collections import Counter
+import string
+
+def cuenta_palabras(archivo):
+    with open(archivo, 'r', encoding='utf-8') as f:
+        texto = f.read().lower()
+        palabras = texto.split()
+        diccionario = {}
+        for palabra in palabras:
+            palabra_limpia = palabra.strip('.,!?()"')
+            if palabra_limpia in diccionario:
+                diccionario[palabra_limpia] += 1
+            else:
+                diccionario[palabra_limpia] = 1
+    return diccionario, texto
+
+archivo = "The Jungle Book.txt"
+resultado, texto = cuenta_palabras(archivo)
+for palabra, cuenta in sorted(resultado.items(), key=lambda item: item[1], reverse=True):
+    print(f"{palabra}: {cuenta}")
+
 def getBuckets(T):
     count = {}
     buckets = {}
@@ -99,7 +120,12 @@ def sais(T):
 
     return SA
 
-string = "GTCCCGATGTCATGTCAGGA$"
+string = texto + "$" # '$'
 T = [ord(c) for c in string]
 SA = sais(T)
 print(SA)
+
+#test_string = "mississippi$"
+#T_test = [ord(c) for c in test_string]
+#SA_test = sais(T_test)
+#print(SA_test)  # Debería imprimir: [11, 10, 7, 4, 1, 0, 8, 5, 2, 9, 6, 3]
