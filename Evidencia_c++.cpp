@@ -64,9 +64,16 @@ int main() {
     std::string str = "GTCCCGATGTCATGTCAGGA$";
     std::vector<int> T(str.begin(), str.end());
     std::vector<int> SA = sais(T);
-    for (int i : SA) {
-        std::cout << i << " ";
+
+    // Inicio de la impresión con el formato deseado
+    std::cout << "[";
+    for (size_t i = 0; i < SA.size(); i++) {
+        std::cout << SA[i];
+        if (i != SA.size() - 1) {
+            std::cout << ", ";
+        }
     }
-    std::cout << std::endl;
+    std::cout << "]" << std::endl;
+
     return 0;
 }
