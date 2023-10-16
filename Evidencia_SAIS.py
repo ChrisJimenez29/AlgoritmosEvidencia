@@ -1,23 +1,23 @@
 from collections import Counter
-import string
+from memory_profiler import profile
 
 def cuenta_palabras(archivo):
+    texto2 = ""
     with open(archivo, 'r', encoding='utf-8') as f:
         texto = f.read().lower()
         palabras = texto.split()
         diccionario = {}
         for palabra in palabras:
+            texto2 += palabra
             palabra_limpia = palabra.strip('.,!?()"')
             if palabra_limpia in diccionario:
                 diccionario[palabra_limpia] += 1
             else:
                 diccionario[palabra_limpia] = 1
-    return diccionario, texto
+    return diccionario, texto2
 
-archivo = "The Jungle Book.txt"
-resultado, texto = cuenta_palabras(archivo)
-for palabra, cuenta in sorted(resultado.items(), key=lambda item: item[1], reverse=True):
-    print(f"{palabra}: {cuenta}")
+#for palabra, cuenta in sorted(resultado.items(), key=lambda item: item[1], reverse=True):
+#   print(f"{palabra}: {cuenta}")
 
 def getBuckets(T):
     count = {}
@@ -32,14 +32,14 @@ def getBuckets(T):
 
 def sais(T):
     t = ["_"] * len(T)
-    
+
     t[len(T) - 1] = "S"
     for i in range(len(T) - 1, 0, -1):
         if T[i-1] == T[i]:
             t[i - 1] = t[i]
         else:
             t[i - 1] = "S" if T[i-1] < T[i] else "L"
-    
+
     buckets = getBuckets(T)
 
     count = {}
@@ -120,10 +120,50 @@ def sais(T):
 
     return SA
 
-string = texto + "$" # '$'
-T = [ord(c) for c in string]
-SA = sais(T)
-print(SA)
+#Pos -> arreglo de sufijos
+#string W en A
+def search(Pos, W, A):
+  N = len(A)
+  occurrences = []
+  
+  #Busca la primera ocurrencia
+  L, R = 0, N
+  
+  while R - L > 1:
+      M = (L + R) // 2
+  
+      if W > A[Pos[M]:]:
+          L = M
+      else:
+          R = M
+  
+  start = L
+  end = N
+  
+  #Encuentra todas las ocurrencias
+  #Buscar manera mas eficiente
+  while start < end:
+      if W == A[Pos[start]:Pos[start] + len(W)]:
+          occurrences.append(Pos[start])
+      start += 1
+  
+  return occurrences
+
+#Descomentar para probar consumo de memoria
+@profile
+def main():
+  archivo = "Metamorphosis.txt"
+  resultado, texto = cuenta_palabras(archivo)
+  s = texto + "$"  #'$'
+  T = [ord(c) for c in s]
+  SA = sais(T)
+  #subS = input()
+  #String debe de estar en minusculas
+  subS = "morning"
+  result = search(SA, subS, s)
+  print("Ocurrencias: ", result)
+
+main()
 
 #test_string = "mississippi$"
 #T_test = [ord(c) for c in test_string]
