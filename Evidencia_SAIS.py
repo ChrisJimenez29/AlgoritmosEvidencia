@@ -146,16 +146,16 @@ def main():
   #Registra el tiempo de inicio
   inicio = time.time()
   
-  archivo = "Metamorphosis.txt"
+  archivo = "The Jungle Book.txt"
   texto = cuenta_palabras(archivo)
-  s = texto + "$"  #'$'
-  T = [ord(c) for c in s]
+  T = [ord(c) for c in texto]
   SA = sais(T)
   #subS = input()
   #String debe de estar en minusculas
   subS = "morning"
-  result = search(SA, subS, s)
-  print("Ocurrencias: ", result)
+  result = search(SA, subS, texto)
+  print(len(result), "ocurrencias: ", result)
+ 
   
   #Registra el tiempo de finalización
   fin = time.time()
