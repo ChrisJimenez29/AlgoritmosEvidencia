@@ -142,26 +142,44 @@ def search(Pos, W, A):
 
 #Descomentar para probar consumo de memoria
 #@profile
-def main():
+def main():  
+  print("Selecciona libro:")
+  print("1. Metamorphosis")
+  print("2. Winnie-the-pooh")
+  print("3. The time machine")
+  print("4. The jungle book")
+
+  libro = int(input())
+  archivo = ""
+
+  if libro == 1:
+      archivo = "Metamorphosis.txt"
+  elif libro == 2:
+      archivo = "Winnie-the-pooh.txt"
+  elif libro == 3:
+      archivo = "TheTimeMachine.txt"
+  elif libro == 4:
+      archivo = "The Jungle Book.txt"
+  else:
+      print("Opcion incorrecta")
+      exit(0)
+
+  print("Ingresa palabra a buscar:")
+  subStr = input()
+
   #Registra el tiempo de inicio
   inicio = time.time()
   
-  archivo = "The Jungle Book.txt"
   texto = cuenta_palabras(archivo)
   T = [ord(c) for c in texto]
   SA = sais(T)
-  #subS = input()
-  #String debe de estar en minusculas
-  subS = "morning"
-  result = search(SA, subS, texto)
+  result = search(SA, subStr, texto)
   print(len(result), "ocurrencias: ", result)
- 
   
   #Registra el tiempo de finalización
   fin = time.time()
   #Calcula el tiempo transcurrido
   tiempo_transcurrido = fin - inicio
-
   print(f"El programa se ejecuto en: {tiempo_transcurrido} segundos")
-
+  
 main()

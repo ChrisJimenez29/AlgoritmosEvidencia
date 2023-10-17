@@ -113,16 +113,39 @@ vector<int> search(const vector<int>& Pos, const string& W, const string& A) {
 }
 
 int main() {
-  
-  //Inicio de programa en tiempo
-  auto inicio = chrono::high_resolution_clock::now();
 
   //Codigo
-  string str = readFiles("The Jungle Book.txt");
+  cout << "Selecciona libro:" << endl << "1. Metamorphosis" << endl << "2. Winnie-the-pooh" << endl << "3. The time machine" << endl << "4. The jungle book" << endl;
+  
+  string archivo;
+  int libro;
+  cin >> libro;
+  if (libro == 1){
+    archivo = "Metamorphosis.txt";
+  }
+  else if (libro == 2){
+    archivo = "Winnie-the-pooh.txt";
+  }
+  else if (libro == 3){
+    archivo = "TheTimeMachine.txt";
+  }
+  else if (libro == 4){
+    archivo = "The Jungle Book.txt";
+  }
+  else {
+    cout << "Opcion incorrecta" << endl;
+    return 0;
+  }
+
+  cout << "Ingresa palabra a buscar: ";
+  string subStr;
+  cin >> subStr;
+
+  auto inicio = std::chrono::high_resolution_clock::now();
+  string str = readFiles(archivo);
   vector<int> T(str.begin(), str.end());
   vector<int> SA = sais(T);
-
-  vector<int>result = search(SA, "morning", str);
+  vector<int>result = search(SA, subStr, str);
   
   cout << result.size() << " ocurrencias: ";
   for (int i = 0; i < result.size(); i++) {
