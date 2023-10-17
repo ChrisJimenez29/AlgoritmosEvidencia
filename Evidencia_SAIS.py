@@ -1,23 +1,15 @@
 from collections import Counter
 from memory_profiler import profile
+import time
 
 def cuenta_palabras(archivo):
     texto2 = ""
     with open(archivo, 'r', encoding='utf-8') as f:
-        texto = f.read().lower()
+        texto = f.read()
         palabras = texto.split()
-        diccionario = {}
         for palabra in palabras:
             texto2 += palabra
-            palabra_limpia = palabra.strip('.,!?()"')
-            if palabra_limpia in diccionario:
-                diccionario[palabra_limpia] += 1
-            else:
-                diccionario[palabra_limpia] = 1
-    return diccionario, texto2
-
-#for palabra, cuenta in sorted(resultado.items(), key=lambda item: item[1], reverse=True):
-#   print(f"{palabra}: {cuenta}")
+    return texto2
 
 def getBuckets(T):
     count = {}
@@ -141,7 +133,6 @@ def search(Pos, W, A):
   end = N
   
   #Encuentra todas las ocurrencias
-  #Buscar manera mas eficiente
   while start < end:
       if W == A[Pos[start]:Pos[start] + len(W)]:
           occurrences.append(Pos[start])
@@ -150,10 +141,13 @@ def search(Pos, W, A):
   return occurrences
 
 #Descomentar para probar consumo de memoria
-@profile
+#@profile
 def main():
+  #Registra el tiempo de inicio
+  inicio = time.time()
+  
   archivo = "Metamorphosis.txt"
-  resultado, texto = cuenta_palabras(archivo)
+  texto = cuenta_palabras(archivo)
   s = texto + "$"  #'$'
   T = [ord(c) for c in s]
   SA = sais(T)
@@ -162,10 +156,12 @@ def main():
   subS = "morning"
   result = search(SA, subS, s)
   print("Ocurrencias: ", result)
+  
+  #Registra el tiempo de finalización
+  fin = time.time()
+  #Calcula el tiempo transcurrido
+  tiempo_transcurrido = fin - inicio
+
+  print(f"El programa se ejecuto en: {tiempo_transcurrido} segundos")
 
 main()
-
-#test_string = "mississippi$"
-#T_test = [ord(c) for c in test_string]
-#SA_test = sais(T_test)
-#print(SA_test)  # Debería imprimir: [11, 10, 7, 4, 1, 0, 8, 5, 2, 9, 6, 3]
