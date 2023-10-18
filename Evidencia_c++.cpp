@@ -115,7 +115,7 @@ vector<int> search(const vector<int>& Pos, const string& W, const string& A) {
 int main() {
 
   //Codigo
-  cout << "Selecciona libro:" << endl << "1. Metamorphosis" << endl << "2. Winnie-the-pooh" << endl << "3. The time machine" << endl << "4. The jungle book" << endl;
+  cout << "Selecciona libro:" << endl << "1. Metamorphosis" << endl << "2. Events of Roman" << endl << "3. The time machine" << endl << "4. The jungle book" << endl;
   
   string archivo;
   int libro;
@@ -124,7 +124,7 @@ int main() {
     archivo = "Metamorphosis.txt";
   }
   else if (libro == 2){
-    archivo = "Winnie-the-pooh.txt";
+    archivo = "eventsofRoman.txt";
   }
   else if (libro == 3){
     archivo = "TheTimeMachine.txt";

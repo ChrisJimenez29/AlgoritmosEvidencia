@@ -145,7 +145,7 @@ def search(Pos, W, A):
 def main():  
   print("Selecciona libro:")
   print("1. Metamorphosis")
-  print("2. Winnie-the-pooh")
+  print("2. Events of Roman")
   print("3. The time machine")
   print("4. The jungle book")
 
@@ -155,7 +155,7 @@ def main():
   if libro == 1:
       archivo = "Metamorphosis.txt"
   elif libro == 2:
-      archivo = "Winnie-the-pooh.txt"
+      archivo = "eventsofRoman.txt"
   elif libro == 3:
       archivo = "TheTimeMachine.txt"
   elif libro == 4:
